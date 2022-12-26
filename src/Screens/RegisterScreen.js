@@ -21,8 +21,8 @@ const RegisterScreen = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        navigation.replace("Home");
-        alert("Account Created");
+        navigation.replace("Login");
+        alert("Successfully Account Created");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -59,6 +59,7 @@ const RegisterScreen = () => {
           style={styles.txtInput}
           placeholder="Email Address"
           autoCorrect={false}
+          autoCapitalize={false}
           onChangeText={(text) => setEmail(text)}
         />
         <Text style={styles.separator}>
@@ -68,14 +69,12 @@ const RegisterScreen = () => {
           style={styles.txtInput}
           placeholder="Password"
           autoCorrect={false}
+          autoCapitalize={false}
           onChangeText={(text) => setPassword(text)}
         />
       </View>
       <View style={styles.btnView}>
-        <TouchableOpacity
-          style={styles.regBtn}
-          onPress={() => register()}
-        >
+        <TouchableOpacity style={styles.regBtn} onPress={() => register()}>
           <Text style={styles.regTxtBtn}>CREATE</Text>
         </TouchableOpacity>
       </View>

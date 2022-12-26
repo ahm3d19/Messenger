@@ -33,6 +33,7 @@ const LoginScreen = () => {
   const state = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        alert("Successfully Login!");
         navigation.replace("Home");
 
         const uid = user.uid;
@@ -62,6 +63,7 @@ const LoginScreen = () => {
           style={styles.txtInput}
           placeholder="Email Address"
           autoCorrect={false}
+          autoCapitalize={false}
           onChangeText={(text) => setEmail(text)}
         />
         <Text style={styles.separator}>
@@ -71,6 +73,8 @@ const LoginScreen = () => {
           style={styles.txtInput}
           placeholder="Password"
           autoCorrect={false}
+          autoCapitalize={false}
+          secureTextEntry={true}
           onChangeText={(text) => setPassword(text)}
         />
       </View>

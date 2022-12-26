@@ -6,13 +6,14 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../Firebase/firebase.config";
 
 const ForgotPasswordScreen = (props) => {
-  const email = props.route.params.email;
+  const passEmail = props.route.params.email;
+  const [email, setEmail] = useState("");
 
   const resetPass = () => {
     if (email != null) {
@@ -41,8 +42,8 @@ const ForgotPasswordScreen = (props) => {
           style={styles.txtInput}
           placeholder="Email Address"
           autoCorrect={false}
+          autoCapitalize={false}
           onChangeText={(text) => setEmail(text)}
-          value={email}
         />
       </View>
       <View style={styles.btnView}>
