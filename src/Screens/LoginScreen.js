@@ -33,7 +33,10 @@ const LoginScreen = () => {
   const state = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
+<<<<<<< HEAD
         alert("Successfully Login!");
+=======
+>>>>>>> c75ba39eb941460ac9b81325b5c15f6d1607634d
         navigation.replace("Home");
 
         const uid = user.uid;
@@ -63,7 +66,10 @@ const LoginScreen = () => {
           style={styles.txtInput}
           placeholder="Email Address"
           autoCorrect={false}
+<<<<<<< HEAD
           autoCapitalize={false}
+=======
+>>>>>>> c75ba39eb941460ac9b81325b5c15f6d1607634d
           onChangeText={(text) => setEmail(text)}
         />
         <Text style={styles.separator}>
@@ -73,8 +79,11 @@ const LoginScreen = () => {
           style={styles.txtInput}
           placeholder="Password"
           autoCorrect={false}
+<<<<<<< HEAD
           autoCapitalize={false}
           secureTextEntry={true}
+=======
+>>>>>>> c75ba39eb941460ac9b81325b5c15f6d1607634d
           onChangeText={(text) => setPassword(text)}
         />
       </View>
