@@ -6,6 +6,9 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -21,19 +24,20 @@ const LoginScreen = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        Alert.alert("Successfully Login!");
         navigation.replace("Home");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(errorMessage);
+        Alert.alert("Login Error", errorMessage);
       });
   };
 
   const state = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        alert("Successfully Login!");
+        // alert("Successfully Login!");
         navigation.replace("Home");
 
         const uid = user.uid;
@@ -49,53 +53,58 @@ const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.imgView}>
-        <Image
-          style={styles.logoImg}
-          source={{
-            uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Facebook_Messenger_logo_2020.svg/2048px-Facebook_Messenger_logo_2020.svg.png",
-          }}
-        />
-      </View>
-      <View>
-        <TextInput
-          style={styles.txtInput}
-          placeholder="Email Address"
-          autoCorrect={false}
-          autoCapitalize={false}
-          onChangeText={(text) => setEmail(text)}
-        />
-        <Text style={styles.separator}>
-          ________________________________________________________
-        </Text>
-        <TextInput
-          style={styles.txtInput}
-          placeholder="Password"
-          autoCorrect={false}
-          autoCapitalize={false}
-          secureTextEntry={true}
-          onChangeText={(text) => setPassword(text)}
-        />
-      </View>
-      <View style={styles.btnView}>
-        <TouchableOpacity style={styles.loginBtn} onPress={() => login()}>
-          <Text style={styles.loginTxtBtn}>LOG IN</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.registerBtn}
-          onPress={() => navigation.navigate("Register")}
-        >
-          <Text style={styles.registerTxtBtn}>CREATE NEW ACCOUNT</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.forgotBtn}
-          onPress={() => navigation.navigate("Forgot", { email: `${email}` })}
-        >
-          <Text style={styles.forgotTxtBtn}>FORGOTTEN PASSWORD</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <SafeAreaView>
+        <View style={styles.imgView}>
+          <Image
+            style={styles.logoImg}
+            source={{
+              uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Facebook_Messenger_logo_2020.svg/2048px-Facebook_Messenger_logo_2020.svg.png",
+            }}
+          />
+        </View>
+        <View>
+          <TextInput
+            style={styles.txtInput}
+            placeholder="Email Address"
+            autoCorrect={false}
+            autoCapitalize={false}
+            onChangeText={(text) => setEmail(text)}
+          />
+          <Text style={styles.separator}>
+            ________________________________________________________
+          </Text>
+          <TextInput
+            style={styles.txtInput}
+            placeholder="Password"
+            autoCorrect={false}
+            autoCapitalize={false}
+            secureTextEntry={true}
+            onChangeText={(text) => setPassword(text)}
+          />
+        </View>
+        <View style={styles.btnView}>
+          <TouchableOpacity style={styles.loginBtn} onPress={() => login()}>
+            <Text style={styles.loginTxtBtn}>LOG IN</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.registerBtn}
+            onPress={() => navigation.navigate("Register")}
+          >
+            <Text style={styles.registerTxtBtn}>CREATE NEW ACCOUNT</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.forgotBtn}
+            onPress={() => navigation.navigate("Forgot", { email: `${email}` })}
+          >
+            <Text style={styles.forgotTxtBtn}>FORGOTTEN PASSWORD</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 

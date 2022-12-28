@@ -5,6 +5,7 @@ import {
   View,
   Image,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import React from "react";
 
@@ -19,7 +20,7 @@ const HomeScreen = () => {
       .then(() => {
         // Sign-out successful.
         navigation.replace("Login");
-        alert("Sign-out successful");
+        Alert.alert("Sign-out Successful!");
       })
       .catch((error) => {
         alert(error);

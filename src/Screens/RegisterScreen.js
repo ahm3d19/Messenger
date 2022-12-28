@@ -6,6 +6,9 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -23,15 +26,12 @@ const RegisterScreen = () => {
         const user = userCredential.user;
 
         navigation.replace("Login");
-        alert("Successfully Account Created");
-
-        navigation.replace("Home");
-        alert("Account Created");
+        Alert.alert("Successfully Account Created");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(errorMessage);
+        Alert.alert("SignUp Error", errorMessage);
         // ..
       });
   };
@@ -40,49 +40,54 @@ const RegisterScreen = () => {
   const [name, setName] = useState("");
   // const [phoneNo, setPhoneNo] = useState("")
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.imgView}>
-        <Image
-          style={styles.logoImg}
-          source={{
-            uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Facebook_Messenger_logo_2020.svg/2048px-Facebook_Messenger_logo_2020.svg.png",
-          }}
-        />
-      </View>
-      <View>
-        <TextInput
-          style={styles.txtInput}
-          placeholder="Full Name"
-          autoCorrect={false}
-          onChangeText={(text) => setName(text)}
-        />
-        <Text style={styles.separator}>
-          ________________________________________________________
-        </Text>
-        <TextInput
-          style={styles.txtInput}
-          placeholder="Email Address"
-          autoCorrect={false}
-          autoCapitalize={false}
-          onChangeText={(text) => setEmail(text)}
-        />
-        <Text style={styles.separator}>
-          ________________________________________________________
-        </Text>
-        <TextInput
-          style={styles.txtInput}
-          placeholder="Password"
-          autoCorrect={false}
-          autoCapitalize={false}
-          onChangeText={(text) => setPassword(text)}
-        />
-      </View>
-      <View style={styles.btnView}>
-        <TouchableOpacity style={styles.regBtn} onPress={() => register()}>
-          <Text style={styles.regTxtBtn}>CREATE</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <SafeAreaView>
+        <View style={styles.imgView}>
+          <Image
+            style={styles.logoImg}
+            source={{
+              uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Facebook_Messenger_logo_2020.svg/2048px-Facebook_Messenger_logo_2020.svg.png",
+            }}
+          />
+        </View>
+        <View>
+          <TextInput
+            style={styles.txtInput}
+            placeholder="Full Name"
+            autoCorrect={false}
+            onChangeText={(text) => setName(text)}
+          />
+          <Text style={styles.separator}>
+            ________________________________________________________
+          </Text>
+          <TextInput
+            style={styles.txtInput}
+            placeholder="Email Address"
+            autoCorrect={false}
+            autoCapitalize={false}
+            onChangeText={(text) => setEmail(text)}
+          />
+          <Text style={styles.separator}>
+            ________________________________________________________
+          </Text>
+          <TextInput
+            style={styles.txtInput}
+            placeholder="Password"
+            autoCorrect={false}
+            autoCapitalize={false}
+            onChangeText={(text) => setPassword(text)}
+          />
+        </View>
+        <View style={styles.btnView}>
+          <TouchableOpacity style={styles.regBtn} onPress={() => register()}>
+            <Text style={styles.regTxtBtn}>CREATE</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 

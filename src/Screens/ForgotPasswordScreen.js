@@ -5,6 +5,9 @@ import {
   SafeAreaView,
   TextInput,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
 } from "react-native";
 
 import React, { useState } from "react";
@@ -23,41 +26,48 @@ const ForgotPasswordScreen = (props) => {
       sendPasswordResetEmail(auth, email)
         .then(() => {
           // Password reset email sent!
-          alert("Password reset email sent!");
+          Alert.alert("Password Email Sent!");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          alert(errorMessage);
+          Alert.alert(errorMessage);
           // ..
         });
     } else {
-      alert("Enter Valid Email!");
+      Alert.alert("Enter Valid Email!");
     }
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.titleView}>
-        <Text style={styles.forgottenTxtLbl}>Forgotten Password</Text>
-        <Text style={styles.txtDesc}>Enter your registered email address.</Text>
-        <TextInput
-          style={styles.txtInput}
-          placeholder="Email Address"
-          autoCorrect={false}
-          autoCapitalize={false}
-          onChangeText={(text) => setEmail(text)}
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <SafeAreaView>
+        <View style={styles.titleView}>
+          <Text style={styles.forgottenTxtLbl}>Forgotten Password</Text>
+          <Text style={styles.txtDesc}>
+            Enter your registered email address.
+          </Text>
+          <TextInput
+            style={styles.txtInput}
+            placeholder="Email Address"
+            autoCorrect={false}
+            autoCapitalize={false}
+            onChangeText={(text) => setEmail(text)}
 
-          // onChangeText={(text) => setEmail(text)}
-          // value={email}
-        />
-      </View>
-      <View style={styles.btnView}>
-        <TouchableOpacity style={styles.sendBtn} onPress={() => resetPass()}>
-          <Text style={styles.txtBtn}>SEND</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+            // onChangeText={(text) => setEmail(text)}
+            // value={email}
+          />
+        </View>
+        <View style={styles.btnView}>
+          <TouchableOpacity style={styles.sendBtn} onPress={() => resetPass()}>
+            <Text style={styles.txtBtn}>SEND</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
