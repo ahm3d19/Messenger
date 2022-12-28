@@ -21,13 +21,12 @@ const RegisterScreen = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-<<<<<<< HEAD
+
         navigation.replace("Login");
         alert("Successfully Account Created");
-=======
+
         navigation.replace("Home");
         alert("Account Created");
->>>>>>> c75ba39eb941460ac9b81325b5c15f6d1607634d
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -64,10 +63,7 @@ const RegisterScreen = () => {
           style={styles.txtInput}
           placeholder="Email Address"
           autoCorrect={false}
-<<<<<<< HEAD
           autoCapitalize={false}
-=======
->>>>>>> c75ba39eb941460ac9b81325b5c15f6d1607634d
           onChangeText={(text) => setEmail(text)}
         />
         <Text style={styles.separator}>
@@ -77,22 +73,12 @@ const RegisterScreen = () => {
           style={styles.txtInput}
           placeholder="Password"
           autoCorrect={false}
-<<<<<<< HEAD
           autoCapitalize={false}
-=======
->>>>>>> c75ba39eb941460ac9b81325b5c15f6d1607634d
           onChangeText={(text) => setPassword(text)}
         />
       </View>
       <View style={styles.btnView}>
-<<<<<<< HEAD
         <TouchableOpacity style={styles.regBtn} onPress={() => register()}>
-=======
-        <TouchableOpacity
-          style={styles.regBtn}
-          onPress={() => register()}
-        >
->>>>>>> c75ba39eb941460ac9b81325b5c15f6d1607634d
           <Text style={styles.regTxtBtn}>CREATE</Text>
         </TouchableOpacity>
       </View>
